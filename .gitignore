@@ -1,0 +1,14 @@
+# .gitignore
+# Dimitrios Paraschas (paraschas@gmail.com)
+
+# Vim swap files
+*.swp
+
+# Python byte code files
+*.pyc
+
+# Java byte code files
+*.class
+
+#notes.txt
+#notes.md

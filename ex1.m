@@ -28,17 +28,21 @@ clear; close all; clc
 
 %% ==================== Part 1: Basic Function ====================
 % Complete warmUpExercise.m
-fprintf('Running warmUpExercise ... \n');
-fprintf('5x5 Identity Matrix: \n');
-warmUpExercise()
-
-fprintf('Program paused. Press enter to continue.\n');
-pause;
+%% dp
+%%fprintf('Running warmUpExercise ... \n');
+%%fprintf('5x5 Identity Matrix: \n');
+%%warmUpExercise()
+%%
+%%fprintf('Program paused. Press enter to continue.\n');
+%%pause;
 
 
 %% ======================= Part 2: Plotting =======================
 fprintf('Plotting Data ...\n')
 data = load('ex1data1.txt');
+%% dp
+%% shrink the size of data for testing
+%%data = data(1:10, :);
 X = data(:, 1); y = data(:, 2);
 m = length(y); % number of training examples
 

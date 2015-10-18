@@ -16,10 +16,12 @@ function plotData(x, y)
 
 figure; % open a new figure window
 
-
-
-
-
+% plot the data
+plot(x, y, 'rx', 'MarkerSize', 10);
+% set the y-axis label
+ylabel('Profit in $10,000s');
+% set the x-axis label
+xlabel('Population of City in 10,000s');
 
 % ============================================================
 

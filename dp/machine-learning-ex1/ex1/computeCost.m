@@ -25,6 +25,7 @@ J = 0;
 
 %X'
 
+%% h_theta
 %theta' * X'
 
 %(theta' * X')'

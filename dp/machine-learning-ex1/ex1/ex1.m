@@ -42,7 +42,7 @@ fprintf('Plotting Data ...\n')
 data = load('ex1data1.txt');
 %% dp
 %% shrink the size of data for testing
-%%data = data(1:10, :);
+%data = data(1:10, :);
 X = data(:, 1); y = data(:, 2);
 m = length(y); % number of training examples
 
@@ -50,6 +50,7 @@ m = length(y); % number of training examples
 % Note: You have to complete the code in plotData.m
 plotData(X, y);
 
+%% dp
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
@@ -87,6 +88,7 @@ predict2 = [1, 7] * theta;
 fprintf('For population = 70,000, we predict a profit of %f\n',...
     predict2 * 10000);
 
+%% dp
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 

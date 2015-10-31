@@ -35,6 +35,7 @@ for i = 1:size(theta)
     for j = 1:m
         grad(i) = grad(i) + ((hypothesis(j) - y(j)) * X(j,i));
     end
+    grad(i) = (1/m) * grad(i);
 end
 
 % =============================================================

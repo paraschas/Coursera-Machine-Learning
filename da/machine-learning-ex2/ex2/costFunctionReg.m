@@ -30,10 +30,10 @@ J = (1/m)*J;
 
 summation = 0;
 
-for j = 1:size(theta)
+for j = 2:size(theta)
     summation = summation + theta(j)^2;
 end
-summation = summation * (lambda/2*m);
+summation = summation * (lambda/(2*m));
 
 J = J + summation;
 

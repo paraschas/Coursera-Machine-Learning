@@ -23,24 +23,23 @@ grad = zeros(n);
 % Note: grad should have the same dimensions as theta
 %
 
-%theta' * X'
-%sigmoid(theta' * X')
 h_theta = sigmoid(theta' * X');
 
-summation = 0;
+% compute the cost
+s = 0;
 for i = 1:m
-    next_term = -y(i) * log(h_theta(i)) - (1 - y(i)) * log(1 - h_theta(i));
-    summation = summation + next_term;
+    s = s + ((-y(i)) * log(h_theta(i)) - (1 - y(i)) * log(1 - h_theta(i)));
 end
 
-J =  (1 / m) * summation;
+J =  (1 / m) * s;
 
-for j = i:n
-    summation = 0;
-    for i = 1:m
-        summation = summation + (h_theta(i) - y(i)) * X(i, j);
+% compute the gradient
+for i = 1:n
+    s = 0;
+    for j = 1:m
+        s = s + ((h_theta(j) - y(j)) * X(j, i));
     end
-    grad(j) =  (1 / m) * summation;
+    grad(i) =  (1 / m) * s;
 end
 
 %J

@@ -47,9 +47,9 @@ summation = (((lambda/(2*m)) * sum((temp.^2))));
 
 J = (1/m)*sum(J) + summation;
 
-grad = (1/m)*(X'*(hypothesis - y))
+grad = (1/m)*(X'*(hypothesis - y));
 
-grad = grad + ((lambda/m)*temp)
+grad = grad + ((lambda/m)*temp);
 
 % =============================================================
 

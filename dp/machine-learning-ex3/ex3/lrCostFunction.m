@@ -57,14 +57,28 @@ h_theta = sigmoid(X * theta);
 %(1 .- y) .* log(1 .- h_theta)
 
 
-% compute the cost
-J =  (1 / m) * sum(((-y) .* log(h_theta)) - ((1 .- y) .* log(1 .- h_theta)));
+% compute the unregularized cost
+J = (1 / m) * sum(((-y) .* log(h_theta)) - ((1 .- y) .* log(1 .- h_theta)));
+
+%J
+
+% compute the regularized cost
+temp_theta = theta;
+temp_theta(1) = 0;
+J = J + (lambda / (2 * m)) * sum(temp_theta .^ 2);
 
 %J
 
 
-% compute the gradient
+% compute the unregularized gradient
 grad = (1 / m) .* (X' * (h_theta - y));
+
+%grad
+
+% compute the regularized gradient
+temp_theta = theta;
+temp_theta(1) = 0;
+grad = grad .+ ((lambda / m) .* temp_theta);
 
 %grad
 

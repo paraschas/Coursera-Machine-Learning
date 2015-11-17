@@ -37,18 +37,18 @@ J =  (1 / m) * s + (lambda / (2 * m)) * s_p;
 
 % compute the gradient of theta 0
 s = 0;
-for j = 1:m
-    s = s + ((h_theta(j) - y(j)) * X(j, i));
+for i = 1:m
+    s = s + ((h_theta(i) - y(i)) * X(i, 1));
 end
 grad(1) =  (1 / m) * s;
 
 % compute the gradient of thetas 1 to n
-for i = 2:n
+for j = 2:n
     s = 0;
-    for j = 1:m
-        s = s + ((h_theta(j) - y(j)) * X(j, i));
+    for i = 1:m
+        s = s + ((h_theta(i) - y(i)) * X(i, j));
     end
-    grad(i) =  (1 / m) * s + (lambda / m) * theta(i);
+    grad(j) =  (1 / m) * s + (lambda / m) * theta(j);
 end
 
 %J

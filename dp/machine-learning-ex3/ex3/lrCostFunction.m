@@ -63,9 +63,10 @@ J = (1 / m) * sum(((-y) .* log(h_theta)) - ((1 .- y) .* log(1 .- h_theta)));
 %J
 
 % compute the regularized cost
-temp_theta = theta;
-temp_theta(1) = 0;
-J = J + (lambda / (2 * m)) * sum(temp_theta .^ 2);
+%temp_theta = theta;
+%temp_theta(1) = 0;
+%J = J + (lambda / (2 * m)) * sum(temp_theta .^ 2);
+J = J + (lambda / (2 * m)) * sum(theta(2:end) .^ 2);
 
 %J
 

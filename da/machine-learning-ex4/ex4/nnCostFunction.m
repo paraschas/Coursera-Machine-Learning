@@ -74,8 +74,10 @@ for i = 1:m
     y_recode(y(i)) = 1;
     J = J + sum( ( (-y_recode) .* log(Y(i,:))' ) - ( (1 - y_recode) .* log(1 - Y(i,:))' ) );
 end
-J = (1/m) .* J
+J = (1/m) .* J;
 
+% Regularized cost
+J = J + (lambda/(2*m)) * (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
 % -------------------------------------------------------------
 

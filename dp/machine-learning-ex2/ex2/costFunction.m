@@ -34,12 +34,12 @@ end
 J =  (1 / m) * s;
 
 % compute the gradient
-for i = 1:n
+for j = 1:n
     s = 0;
-    for j = 1:m
-        s = s + ((h_theta(j) - y(j)) * X(j, i));
+    for i = 1:m
+        s = s + ((h_theta(i) - y(i)) * X(i, j));
     end
-    grad(i) =  (1 / m) * s;
+    grad(j) =  (1 / m) * s;
 end
 
 %J

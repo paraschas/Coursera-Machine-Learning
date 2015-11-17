@@ -58,5 +58,5 @@ function out = output(partId, auxstring)
   elseif partId == '6'
     [cost, grad] = costFunctionReg([0.25 0.5 -0.5]', X, y, 0.1);
     out = sprintf('%0.5f ', grad);
-  end 
+  end
 end

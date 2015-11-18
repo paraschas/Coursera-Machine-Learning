@@ -8,11 +8,19 @@ function p = predictOneVsAll(all_theta, X)
 %  of values from 1..K (e.g., p = [1; 3; 1; 2] predicts classes 1, 3, 1, 2
 %  for 4 examples)
 
+% number of training examples
+% (5000)
 m = size(X, 1);
+% number of parameters
+% (400)
+%n = size(X, 2);
+
+% number of labels
+% (10)
 num_labels = size(all_theta, 1);
 
 % You need to return the following variables correctly
-p = zeros(size(X, 1), 1);
+p = zeros(m, 1);
 
 % Add ones to the X data matrix
 X = [ones(m, 1) X];
@@ -31,12 +39,23 @@ X = [ones(m, 1) X];
 %
 
 
+% size(all_theta) == [10 401]
+% size(X) == [5000 401]
+
+% % size(h_theta) == [10 5000]
+% h_theta = sigmoid(all_theta * X');
+%
+% % size(h_theta) == [5000 10]
+% h_theta = h_theta';
+%
+% for i = 1:m
+%     [temp p(i)] = max(h_theta(i, :));
+% end
 
 
-
-
+% vectorized implementation
+[values p] = max((sigmoid(all_theta * X'))', [], 2);
 
 % =========================================================================
-
 
 end

@@ -63,23 +63,62 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 % Feedforward
-X = [ones(size(X, 1), 1) X];
-A = sigmoid(X * Theta1');
-A = [ones(size(A, 1), 1) A];
-num_labels;
-Y = sigmoid(A * Theta2');
+A1 = [ones(size(X, 1), 1) X];
+Z2 = A1 * Theta1';
+A2 = sigmoid(Z2);
+A2 = [ones(size(A2, 1), 1) A2];
+Z3 = A2 * Theta2';
+A3 = sigmoid(Z3);
+Y = zeros(m, num_labels);
 
 for i = 1:m
+    % Convert y(i) to logical array
     y_recode = zeros(num_labels,1);
     y_recode(y(i)) = 1;
-    J = J + sum( ( (-y_recode) .* log(Y(i,:))' ) - ( (1 - y_recode) .* log(1 - Y(i,:))' ) );
+    Y(i,:) = y_recode;
+    % Compute cost
+    J = J + sum( ( (-y_recode) .* log(A3(i,:))' ) - ...
+                ( (1 - y_recode) .* log(1 - A3(i,:))' ) );
 end
 J = (1/m) .* J;
 
 % Regularized cost
-J = J + (lambda/(2*m)) * (sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
+J = J + (lambda/(2*m)) * (sum(sum(Theta1(:, 2:end).^2)) + ...
+                            sum(sum(Theta2(:, 2:end).^2)));
 
 % -------------------------------------------------------------
+
+delta1 = zeros(size(Theta1));
+delta2 = zeros(size(Theta2));
+
+for t = 1:m
+    a1 = A1(t,:)';
+    z2 = [1; Z2(t,:)'];
+    %size(z2)
+    a2 = A2(t,:)';
+    z3 = Z3(t,:)';
+    a3 = A3(t,:)';
+
+    d3 = a3 - Y(t,:)';
+
+    d2 = (Theta2' * d3) .* sigmoidGradient(z2);
+    % remove bias unit
+    d2 = d2(2:end);
+
+    delta1 = delta1 + d2 * a1';
+    delta2 = delta2 + d3 * a2';
+
+end
+
+Theta1_grad = (1/m) * delta1;
+Theta2_grad = (1/m) * delta2;
+
+% Fill with zeros the bias collumn
+Theta1_z = [zeros(hidden_layer_size, 1) Theta1(:, 2:end)];
+Theta2_z = [zeros(num_labels, 1) Theta2(:, 2:end)];
+% Regularized gradient
+Theta1_grad = Theta1_grad + ( (lambda/m) * Theta1_z);
+Theta2_grad = Theta2_grad + ( (lambda/m) * Theta2_z);
 
 % =========================================================================
 

@@ -63,6 +63,10 @@ Y = eye(num_labels)(y, :);
 
 J = (1 / m) * sum(sum(((-Y) .* log(h_theta)) - ((1 .- Y) .* log(1 .- h_theta))));
 
+regularization_term = (lambda / (2 * m)) * (sum(sum(Theta1(:, 2:end) .^ 2)) + sum(sum(Theta2(:, 2:end) .^2)));
+
+J = J + regularization_term;
+
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of

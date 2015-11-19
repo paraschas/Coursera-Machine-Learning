@@ -47,10 +47,16 @@ Theta2_grad = zeros(size(Theta2));
 a_1 = [ones(m, 1) X];
 % size(a_1) == [5000 401]
 
-a_2 = [ones(m, 1) sigmoid(a_1 * Theta1')];
+z_2 = a_1 * Theta1';
+% size(z_2) == [5000 25]
+
+a_2 = [ones(m, 1) sigmoid(z_2)];
 % size(a_2) == [5000 26]
 
-a_3 = sigmoid(a_2 * Theta2');
+z_3 = a_2 * Theta2';
+% size(z_3) == [5000 10]
+
+a_3 = sigmoid(z_3);
 % size(a_3) == [5000 10]
 
 h_theta = a_3;
@@ -83,6 +89,21 @@ J = J + regularization_term;
 %               over the training examples if you are implementing it for the
 %               first time.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+d_3 = a_3 - Y;
+% size(d_3) == [5000 10]
+
+d_2 = (d_3 * Theta2)(:, 2:end) .* sigmoidGradient(z_2);
+% size(d_2) == [5000 25]
+
+D_1 = d_2' * a_1;
+% size(D_1) == [25 401]
+
+D_2 = d_3' * a_2;
+% size(D_2) == [10 26]
+
+Theta1_grad = (D_1 ./ m) + ((lambda / m) .* [zeros(hidden_layer_size, 1) Theta1(:, 2:end)]);
+Theta2_grad = (D_2 ./ m) + ((lambda / m) .* [zeros(num_labels, 1) Theta2(:, 2:end)]);
 
 
 % Part 3: Implement regularization with the cost function and gradients.

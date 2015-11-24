@@ -11,10 +11,13 @@ function [lambda_vec, error_train, error_val] = ...
 
 % Selected values of lambda (you should not change this)
 lambda_vec = [0 0.001 0.003 0.01 0.03 0.1 0.3 1 3 10]';
+% size(lambda_vec) == [10 1]
 
 % You need to return these variables correctly.
 error_train = zeros(length(lambda_vec), 1);
+% size(error_train) == [10 1]
 error_val = zeros(length(lambda_vec), 1);
+% size(error_val) == [10 1]
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return training errors in
@@ -39,14 +42,26 @@ error_val = zeros(length(lambda_vec), 1);
 %
 %
 
+% size(X) == [12 9]
+% size(y) == [12 1]
+% size(Xval) == [21 9]
+% size(yval) == [21 1]
 
+% number of training examples
+m = size(X, 1);
 
+for i = 1:length(lambda_vec)
+    lambda = lambda_vec(i);
 
+    % copied from learningCurve.m
+    for j = 1:m
+        theta = trainLinearReg(X(1:j, :), y(1:j), lambda);
 
+        error_train(i) = linearRegCostFunction(X(1:j, :), y(1:j), theta, 0);
 
-
-
-
+        error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+    end
+end
 
 % =========================================================================
 

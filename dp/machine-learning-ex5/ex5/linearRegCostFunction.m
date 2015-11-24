@@ -6,11 +6,14 @@ function [J, grad] = linearRegCostFunction(X, y, theta, lambda)
 %   data points in X and y. Returns the cost in J and the gradient in grad
 
 % Initialize some useful values
-m = length(y); % number of training examples
+% number of training examples
+m = length(y);
+% m == 12
 
 % You need to return the following variables correctly
 J = 0;
 grad = zeros(size(theta));
+% size(grad) == [2 1]
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost and gradient of regularized linear
@@ -19,16 +22,15 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+% size(X) == [12 2]
+% size(y) == [12 1]
+% size(theta) == [2 1]
 
+%h_theta = X * theta;
+% size(h_theta) == [12 1]
+%J = (1 / (2 * m)) * sum((h_theta - y) .^ 2) + (lambda / (2 * m)) * sum(theta(2:end, :) .^ 2);
 
-
-
-
-
-
-
-
-
+J = (1 / (2 * m)) * sum(((X * theta) - y) .^ 2) + (lambda / (2 * m)) * sum(theta(2:end, :) .^ 2);
 
 % =========================================================================
 

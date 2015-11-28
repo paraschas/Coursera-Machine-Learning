@@ -33,10 +33,8 @@ test_values = [0.01 0.03 0.1 0.3 1 3 10 30];
 %tic
 
 errors = [];
-for i = 1:length(test_values)
-    C = test_values(i);
-    for j = 1:length(test_values)
-        sigma = test_values(j);
+for C = test_values
+    for sigma = test_values
         % DEBUG
         %fprintf('training the SVM with C = %f and sigma = %f\n', C, sigma);
         % function [model] = svmTrain(X, Y, C, kernelFunction, tol, max_passes)
